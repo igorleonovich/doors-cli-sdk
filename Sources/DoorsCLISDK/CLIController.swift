@@ -7,9 +7,9 @@
 
 import Foundation
 
-class CLIController {
+public class CLIController {
     
-    func print(_ message: String, to: OutputType = .standardPale) {
+    public func print(_ message: String, to: OutputType = .standardPale) {
         switch to {
         case .standardPale:
             fputs("\(message)\n", stdout)
@@ -32,7 +32,7 @@ class CLIController {
 //    }
 }
 
-enum OutputType {
+public enum OutputType {
     case standardPale
     case highlightedGreen
     case highlightedPurple
