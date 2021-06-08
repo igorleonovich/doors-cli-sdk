@@ -9,6 +9,10 @@ import Foundation
 
 public class CLIController {
     
+    public init() {
+        
+    }
+    
     public func print(_ message: String, to: OutputType = .standardPale) {
         switch to {
         case .standardPale:
