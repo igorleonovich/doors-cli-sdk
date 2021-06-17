@@ -28,12 +28,31 @@ public class CLIController {
         }
     }
     
-//    func getInput() -> String? {
-//        let keyboard = FileHandle.standardInput
-//        let inputData = keyboard.availableData
-//        let stringData = String(data: inputData, encoding: String.Encoding.utf8)?.trimmingCharacters(in: CharacterSet.newlines)
-//        return stringData
-//    }
+    public func getInput() -> String? {
+        let keyboard = FileHandle.standardInput
+        let inputData = keyboard.availableData
+        let stringData = String(data: inputData, encoding: String.Encoding.utf8)?.trimmingCharacters(in: CharacterSet.newlines)
+        return stringData
+    }
+    
+    public func shell(_ command: String, arguments: [String]? = nil) -> String {
+        let task = Process()
+        if let arguments = arguments {
+            task.arguments = arguments
+        }
+        let pipe = Pipe()
+        
+        task.standardOutput = pipe
+        task.standardError = pipe
+        task.arguments = ["-c", command]
+        task.launchPath = "/bin/zsh"
+        task.launch()
+        
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let output = String(data: data, encoding: .utf8)!
+        
+        return output
+    }
 }
 
 public enum OutputType {
