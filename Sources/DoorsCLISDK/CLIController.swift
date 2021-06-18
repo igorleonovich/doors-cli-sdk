@@ -35,7 +35,7 @@ public class CLIController {
         return stringData
     }
     
-    public func shell(_ command: String, arguments: [String]? = nil) -> String {
+    @discardableResult public func shell(_ command: String, arguments: [String]? = nil) -> String {
         let task = Process()
         if let arguments = arguments {
             task.arguments = arguments
